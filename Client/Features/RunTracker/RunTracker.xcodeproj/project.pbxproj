@@ -10,6 +10,9 @@
 		187C0D8D15EA5E6A00E89420 /* pin16.png in Resources */ = {isa = PBXBuildFile; fileRef = 187C0D8C15EA5E6A00E89420 /* pin16.png */; };
 		187C0D9015EA617C00E89420 /* Search.png in Resources */ = {isa = PBXBuildFile; fileRef = 187C0D8F15EA617C00E89420 /* Search.png */; };
 		187C0D9215EA672D00E89420 /* Add-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 187C0D9115EA672D00E89420 /* Add-icon.png */; };
+		18E8013715FF3BA100E4A7FD /* RTMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E8013615FF3BA100E4A7FD /* RTMapPoint.m */; };
+		18E8013B15FF56AC00E4A7FD /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E8013915FF56AC00E4A7FD /* car.png */; };
+		18E8013C15FF56AC00E4A7FD /* car2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E8013A15FF56AC00E4A7FD /* car2.png */; };
 		BC4BCD6015DE211000DC3BF4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BC4BCD5F15DE211000DC3BF4 /* Icon.png */; };
 		BC4BCD6215DE211400DC3BF4 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC4BCD6115DE211400DC3BF4 /* Icon@2x.png */; };
 		BC94C1CF15DCFAD5001DCFF9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC94C1CE15DCFAD5001DCFF9 /* UIKit.framework */; };
@@ -46,6 +49,10 @@
 		187C0D8C15EA5E6A00E89420 /* pin16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin16.png; sourceTree = "<group>"; };
 		187C0D8F15EA617C00E89420 /* Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Search.png; sourceTree = "<group>"; };
 		187C0D9115EA672D00E89420 /* Add-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Add-icon.png"; sourceTree = "<group>"; };
+		18E8013515FF3BA100E4A7FD /* RTMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTMapPoint.h; sourceTree = "<group>"; };
+		18E8013615FF3BA100E4A7FD /* RTMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTMapPoint.m; sourceTree = "<group>"; };
+		18E8013915FF56AC00E4A7FD /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
+		18E8013A15FF56AC00E4A7FD /* car2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car2.png; sourceTree = "<group>"; };
 		BC4BCD5F15DE211000DC3BF4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BC4BCD6115DE211400DC3BF4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BC94C1CA15DCFAD5001DCFF9 /* RunTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +112,8 @@
 		BC94C1BF15DCFAD4001DCFF9 = {
 			isa = PBXGroup;
 			children = (
+				18E8013915FF56AC00E4A7FD /* car.png */,
+				18E8013A15FF56AC00E4A7FD /* car2.png */,
 				187C0D8F15EA617C00E89420 /* Search.png */,
 				187C0D9115EA672D00E89420 /* Add-icon.png */,
 				187C0D8C15EA5E6A00E89420 /* pin16.png */,
@@ -151,6 +160,8 @@
 				BC94C20715DCFC78001DCFF9 /* RTMainViewController.h */,
 				BC94C20815DCFC78001DCFF9 /* RTMainViewController.m */,
 				BC94C20915DCFC78001DCFF9 /* RTMainViewController.xib */,
+				18E8013515FF3BA100E4A7FD /* RTMapPoint.h */,
+				18E8013615FF3BA100E4A7FD /* RTMapPoint.m */,
 			);
 			path = RunTracker;
 			sourceTree = "<group>";
@@ -264,6 +275,8 @@
 				187C0D8D15EA5E6A00E89420 /* pin16.png in Resources */,
 				187C0D9015EA617C00E89420 /* Search.png in Resources */,
 				187C0D9215EA672D00E89420 /* Add-icon.png in Resources */,
+				18E8013B15FF56AC00E4A7FD /* car.png in Resources */,
+				18E8013C15FF56AC00E4A7FD /* car2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +315,7 @@
 				BC94C1E115DCFAD5001DCFF9 /* RTAppDelegate.m in Sources */,
 				BC94C1E415DCFAD5001DCFF9 /* RunTracker.xcdatamodeld in Sources */,
 				BC94C20A15DCFC78001DCFF9 /* RTMainViewController.m in Sources */,
+				18E8013715FF3BA100E4A7FD /* RTMapPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

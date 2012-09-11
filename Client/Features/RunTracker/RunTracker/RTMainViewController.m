@@ -100,7 +100,14 @@
         [self.mapView addOverlay:line];
         free(points);
     }
+    else if (currentLocation == nil)
+    {
+        [self getAddressFromLocation:newLocation];
+    }
+    
     currentLocation = newLocation;
+    [self plotTaxiPosition:newLocation.coordinate];
+    
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id)overlay
@@ -143,17 +150,19 @@
 - (IBAction)FindLocation:(id)sender {
 //    BOOL isShowLocation = self.mapView.showsUserLocation;
 //    MKUserLocation * location = self.mapView.userLocation;
-    
+}
+
+- (void)getAddressFromLocation:(CLLocation*)location {
     CLGeocoder * geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray * placemarks, NSError * error) {
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray * placemarks, NSError * error) {
         NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
         if (error){
             NSLog(@"Geocode failed with error: %@", error);
-//            [self displayError:error];
+            //            [self displayError:error];
             return;
         }
         NSLog(@"Received placemarks: %@", placemarks);
-//        [self displayPlacemarks:placemarks];
+        //        [self displayPlacemarks:placemarks];
         if ([placemarks count] > 0)
         {
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
@@ -179,4 +188,77 @@
         }
     } ];
 }
+
+-(void)plotTaxiPosition:(CLLocationCoordinate2D)userCoordinate
+{
+    for (id<MKAnnotation> annotation in self.mapView.annotations)
+    {
+        if ([annotation isKindOfClass:[RTMapPoint class]]) {
+            [self.mapView removeAnnotation:annotation];
+        }
+    }
+    
+    CGPoint nePoint = CGPointMake(mapView.bounds.origin.x + mapView.bounds.size.width, mapView.bounds.origin.y);
+    CGPoint swPoint = CGPointMake((mapView.bounds.origin.x), (mapView.bounds.origin.y + mapView.bounds.size.height));
+    
+    //Then transform those point into lat,lng values
+    CLLocationCoordinate2D neCoord = [mapView convertPoint:nePoint toCoordinateFromView:mapView];
+    CLLocationCoordinate2D swCoord = [mapView convertPoint:swPoint toCoordinateFromView:mapView];
+    
+    // Loop
+    for (int i = 0; i < NUM_TAXI; i++) {
+        double latRange = [self randomFloatBetween:neCoord.latitude andBig:swCoord.latitude];
+        double longRange = [self randomFloatBetween:neCoord.longitude andBig:swCoord.longitude];
+        
+        // Add new waypoint to map
+        CLLocationCoordinate2D location = CLLocationCoordinate2DMake(latRange, longRange);
+        NSString *taxiType = @"4 Seats";
+        if(i >= NUM_TAXI_4SEATS)
+            taxiType = @"7 Seats";
+        
+        RTMapPoint *mapPoint = [[RTMapPoint alloc] initWithName:taxiType address:@"" coordinate:location];
+        [mapView addAnnotation:mapPoint];
+        
+    }
+}
+
+-(double)randomFloatBetween:(double)smallNumber andBig:(double)bigNumber {
+    double diff = bigNumber - smallNumber;
+    return (((double) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
+}
+
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    static NSString *identifier;
+    if ([annotation isKindOfClass:[RTMapPoint class]]) {
+        UIImage *img;
+        if([((RTMapPoint*)annotation).name isEqualToString:@"7 Seats"])
+        {
+            identifier = @"7Seats";
+            img = [UIImage imageNamed:@"car2.png"];
+        } else {
+            identifier = @"4Seats";
+            img = [UIImage imageNamed:@"car.png"];
+        }
+        
+        MKPinAnnotationView *pinAnnotation = (MKPinAnnotationView*)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if(pinAnnotation == nil)
+        {
+            pinAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        }
+        else
+        {
+            pinAnnotation.annotation = annotation;
+        }
+        
+        pinAnnotation.enabled = YES;
+        pinAnnotation.canShowCallout = YES;
+        pinAnnotation.image = img;
+        return pinAnnotation;
+    }
+    
+    return nil;
+}
+
 @end
